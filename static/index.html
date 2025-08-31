@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MedLegal – Claim Adjudicator</title>
+  <style>
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; background:#fafafa; }
+    .page-wrapper { display:flex; flex-direction:column; align-items:center; padding: 32px 16px; }
+    #container { width: min(900px, 92%); margin-top: 16px; background:#fff; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:24px; }
+    h1 { margin:0 0 12px; }
+    form { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+    input[type="file"] { padding:6px; }
+    input[type="text"] { padding:8px 10px; border:1px solid #ddd; border-radius:8px; width:220px; }
+    button { background:#111827; color:#fff; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; }
+    button:hover { background:#0b1220; }
+    #pdf-output { width: min(900px, 92%); margin-top: 20px; }
+    #processing-overlay {
+      display:none !important;
+      position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 1000;
+      justify-content: center; align-items: center;
+    }
+    .processing-content { background:#fff; padding:24px 32px; border-radius:12px; box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align:center; }
+    .processing-content img { width: 72px; margin-bottom: 12px; }
+    .report-container { background:#fff; border-radius:12px; box-shadow:0 2px 18px rgba(0,0,0,.1); padding:24px; line-height:1.55; }
+    .report-container h1, .report-container h2, .report-container h3 { margin-top: 1.2em; }
+    .report-container table { width:100%; border-collapse:collapse; }
+    .report-container table, .report-container th, .report-container td { border:1px solid #e5e7eb; }
+    .report-container th, .report-container td { padding:8px 10px; }
+    .report-container code { background:#f3f4f6; padding:2px 4px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div id="container">
+      <h1>Upload a PDF for Adjudication</h1>
+      <form id="upload-form">
+        <input type="file" id="pdf-upload" name="pdf" accept="application/pdf" required />
+        <input type="text" id="claim-id" name="claim_id" placeholder="Claim ID (optional)" />
+        <button type="submit">Upload & Generate Report</button>
+      </form>
+      <p id="hint" style="color:#6b7280;margin-top:6px;">
+        The backend will classify, collect text, build case, compute severity & confidence, then return a Markdown report.
+      </p>
+    </div>
+
+    <div id="pdf-output"></div>
+  </div>
+
+  <div id="processing-overlay">
+    <div class="processing-content">
+      <img src="/static/processing.gif" alt="Processing..." />
+      <p>Processing your claim… this may take a minute.</p>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
