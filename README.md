@@ -287,14 +287,4 @@ samples/
 * **Classifier looks “slow”**
   The classifier runs per page with `max_workers` from the API querystring. Increase it cautiously; the bottleneck is DocAI QPS and your network.
 
----
-
-## FAQ
-
-**Can I feed the LLM more structure?**
-Yes—`collect_text.py` is deliberately “max coverage.” If you want stronger structure, you can augment with layout/tables later and append the raw text beneath so the LLM never loses signal.
-
-**Can the front-end show intermediate artifacts?**
-Add Flask routes that proxy FastAPI’s `/search` and render search hits; or expose direct download routes to `case.json`, `severity.json`, `scoring.json`.
-
 
