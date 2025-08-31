@@ -61,7 +61,7 @@ MEDLEGAL_API_BASE=http://127.0.0.1:8010
 
 ---
 
-## Repo Layout (high level)
+## Repo Layout 
 
 ```
 medlegal/
@@ -100,7 +100,7 @@ medlegal/
 
 ---
 
-## Pipeline (what happens under the hood)
+## Pipeline 
 
 1. **Split**
 
@@ -172,7 +172,7 @@ Base: `http://127.0.0.1:8010`
 
 ---
 
-## Flask demo UI (this repo’s `server.py`)
+## Flask demo UI 
 
 ### What it does
 
@@ -241,7 +241,7 @@ markdown
 
 ---
 
-## Artifacts per claim (where things land)
+## Artifacts per claim 
 
 ```
 samples/
@@ -267,7 +267,7 @@ samples/
 
 ---
 
-## Reliability notes (things that match your current code)
+## Reliability notes 
 
 * **Severity sometimes “defaults to 1”?**
   That means the model response wasn’t fully parseable, so the code bounded defaults.
@@ -289,15 +289,6 @@ samples/
 
 ---
 
-## Production tips (optional)
-
-* Run both servers behind a reverse proxy (nginx/Caddy), terminate TLS there.
-* Turn off `--reload` in production.
-* Add auth to `/adjudicate` if you expose it outside localhost.
-* Consider writing the final report as **PDF** too (e.g., use `weasyprint` or an HTML→PDF renderer) if you plan to email/share.
-
----
-
 ## FAQ
 
 **Can I feed the LLM more structure?**
@@ -305,8 +296,5 @@ Yes—`collect_text.py` is deliberately “max coverage.” If you want stronger
 
 **Can the front-end show intermediate artifacts?**
 Add Flask routes that proxy FastAPI’s `/search` and render search hits; or expose direct download routes to `case.json`, `severity.json`, `scoring.json`.
-
-**Do I need the “sifter” LLM stage?**
-No; current design passes the full dossier to the case builder (with citations) and keeps severity isolated to avoid leakage of numeric scores.
 
 
